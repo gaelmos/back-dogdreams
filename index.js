@@ -1,5 +1,5 @@
-import cors from 'cors'
-import usuario from 'fechas.js'
+import cors from 'cors';
+import usuario from './fechas.js';
 import express from 'express';
 import { client } from './dbconfig.js';
 import bcryptjs from "bcryptjs";
@@ -16,8 +16,9 @@ app.listen(port, () => { console.log(' el servidor esta corriendo en port', {por
 app.post("/usuario",async (req, res) => {
     try{ 
         const hashed = await bcryptjs.hash( req.body.contraseña,10)
+        const dni = req.body.dni;
         const nuevousuario = await usuario.createusuario(req.body.nombre, req.body.mail, parseInt(dni), req.body.numero, req.body.direccion, hashed, req.body.foto)
-        res.json(nuevousuario);
+        res.json("usuario creado correctamente");
          
     } catch (err) {
         if (err.message.includes('DNI ya está en uso')) {
@@ -51,7 +52,7 @@ app.post("/usuario",async (req, res) => {
                     const token = jwt.sign(
                         { id: usuario.id, mail: usuario.mail }, 
                         claveSecreta, 
-                        { expiresIn: '72h' } // Expiración del token (1 hora)
+                        { expiresIn: '72h' } 
                     );
     
                     console.log("Token generado: ", token);
@@ -66,4 +67,17 @@ app.post("/usuario",async (req, res) => {
             console.error(error);
             res.status(500).json({ error: 'Error al iniciar sesión' });
         }
+        
+    });
+    app.post("/perros",async (req, res) => {
+        const {nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades} = req.body;
+        try{ 
+            const nuevoperro = await usuario.crateperro(nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades)
+            res.json(nuevoperro);
+             
+        } catch (err) {
+            console.error(error);
+            res.status(500).json({ error: 'Error al crear al perro' });
+        }
+
     });
