@@ -33,16 +33,30 @@ const createusuario = async (nombre, mail, dni, numero, direccion, contraseña, 
             throw err; 
         }
 };
-const crateperro = async (nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades) => {
-    const query = 'INSERT INTO perros (nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
-    const values = [nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades];
-        try {
-            const result = await client.query(query, values);
-            return result.rows[0];
-        } catch (err) {
-            console.error('Error al insertar el perro:', err);
-            throw err; 
-        }
+const crateperro = async (nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades, dniDueño) => {
+    console.log("DNI del dueño:", dniDueño);
+    const queryPerro = 'INSERT INTO perros (nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id ';
+    const valuesPerro = [nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades];
+
+    try {
+        
+        const resultPerro = await client.query(queryPerro, valuesPerro);
+        const perroId = resultPerro.rows[0].id;
+        const queryPublicacion = 'INSERT INTO publicaciones (idperro, fechapublica, iddueño) VALUES ($1, CURRENT_DATE::DATE, $2) RETURNING *';
+        const valuesPublicacion = [perroId, dniDueño];
+        console.log("Valores a insertar en publicaciones:", valuesPublicacion);
+
+        const resultPublicacion = await client.query(queryPublicacion, valuesPublicacion);
+        console.log("Publicación creada:", resultPublicacion.rows[0]);
+
+        return {
+            perro: resultPerro.rows[0],
+            publicacion: resultPublicacion.rows[0]
+        };
+    } catch (err) {
+        console.error('Error al insertar el perro:', err);
+        throw err; 
+    }
 };
 const usuario = {
     createusuario,

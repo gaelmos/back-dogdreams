@@ -4,11 +4,11 @@ import express from 'express';
 import { client } from './dbconfig.js';
 import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken'; 
-import crypto from 'crypto';
+import { verificarToken } from './middleware.js';
 const app = express();
 const port = 3000;
-const claveSecreta = crypto.randomBytes(64).toString('hex'); 
 
+const claveSecreta = "clavesecreta";
 app.use(cors({origin: '*', credentials: true}));
 app.use(express.json());
 app.listen(port, () => { console.log(' el servidor esta corriendo en port', {port}); })
@@ -51,7 +51,7 @@ app.post("/usuario",async (req, res) => {
                     // Crear el token JWT
                     const token = jwt.sign(
                         { id: usuario.id, mail: usuario.mail }, 
-                        claveSecreta, 
+                        claveSecreta,
                         { expiresIn: '72h' } 
                     );
     
@@ -69,15 +69,20 @@ app.post("/usuario",async (req, res) => {
         }
         
     });
-    app.post("/perros",async (req, res) => {
-        const {nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades} = req.body;
-        try{ 
-            const nuevoperro = await usuario.crateperro(nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades)
+    app.post("/perros", verificarToken, async (req, res) => {
+        const { nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades } = req.body;
+        const dniDueño = req.usuario.dni;  // Obtener el DNI del dueño (usuario autenticado) desde el token
+    
+        try { 
+            const nuevoperro = await usuario.crateperro(
+                nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades, dniDueño
+            );
             res.json(nuevoperro);
-             
+    
         } catch (err) {
-            console.error(error);
+            console.error(err);
             res.status(500).json({ error: 'Error al crear al perro' });
         }
 
     });
+    export{claveSecreta}
