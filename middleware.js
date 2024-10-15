@@ -8,8 +8,13 @@ export const verificarToken = (req, res, next) => {
 
     jwt.verify(token, claveSecreta, (err, usuario) => {
         if (err) return res.status(403).send('Token no válido');
-        console.log("Token decodificado:", usuario);
-        req.usuario = usuario;  
+        console.log("Token decodificado:");
+        if (usuario.dni) {
+            req.usuario = usuario;  
+            next();  
+        } else {
+            res.status(400).send('El token no contiene un DNI válido');
+        }
         next();  
     });
 };

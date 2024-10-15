@@ -50,7 +50,7 @@ app.post("/usuario",async (req, res) => {
                 if (contracompa) {
                     // Crear el token JWT
                     const token = jwt.sign(
-                        { id: usuario.id, mail: usuario.mail }, 
+                        { id: usuario.id, mail: usuario.mail, dni: usuario.dni }, 
                         claveSecreta,
                         { expiresIn: '72h' } 
                     );
@@ -71,8 +71,7 @@ app.post("/usuario",async (req, res) => {
     });
     app.post("/perros", verificarToken, async (req, res) => {
         const { nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades } = req.body;
-        const dniDueño = req.usuario.dni;  // Obtener el DNI del dueño (usuario autenticado) desde el token
-    
+        const dniDueño = req.usuario;  
         try { 
             const nuevoperro = await usuario.crateperro(
                 nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades, dniDueño
