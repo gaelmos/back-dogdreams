@@ -39,23 +39,25 @@ app.post("/usuario",async (req, res) => {
         const { mail, contraseña } = req.body;
         try {
             // Obtener el hash almacenado en la base de datos
-            const queryinicio = "SELECT contraseña FROM usuario WHERE mail = $1";
+            const queryinicio = "SELECT contraseña, mail, dni FROM usuario WHERE mail = $1";
             const resulta1 = await client.query(queryinicio, [mail]);
     
             if (resulta1.rows.length === 1) {
                 const usuario = resulta1.rows[0];
                 const storedHash = usuario.contraseña;
                 const contracompa = await bcryptjs.compare(contraseña, storedHash);
-    
+                console.log("usuario",usuario)
                 if (contracompa) {
                     // Crear el token JWT
                     const token = jwt.sign(
-                        { id: usuario.id, mail: usuario.mail, dni: usuario.dni }, 
-                        claveSecreta,
-                        { expiresIn: '72h' } 
+                        { dni: usuario.dni }, 
+                        claveSecreta
                     );
     
                     console.log("Token generado: ", token);
+
+                    const sarasa = jwt.verify(token, claveSecreta);
+                    console.log("desencriptado:", sarasa)
                     res.status(200).json({ message: "Has iniciado sesión correctamente", token });
                 } else {
                     res.status(401).send("Contraseña incorrecta, intenta de nuevo");
