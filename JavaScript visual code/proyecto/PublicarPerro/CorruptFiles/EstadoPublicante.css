@@ -1,0 +1,99 @@
+* {
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+}
+
+.Pantalla {
+    width: 95vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Mantener la disposición en columna para apilar los elementos */
+    align-items: center; /* Alinea todo al centro horizontalmente */
+    justify-content: flex-start; /* Mantiene el contenido alineado arriba */
+    padding: 0 2vw;
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #313130;
+    margin-bottom: 20px; /* Separación entre logo e imagen */
+    height: 150px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.Logo p {
+    color: #fff;
+    font-family: Kenia;
+    font-size: 128px;
+    letter-spacing: 80.96px;
+    text-align: center;
+}
+
+.img {
+    padding: 7px;
+    max-height: 25%; /* Reducir el tamaño de la imagen al 50% del ancho */
+    height: auto; /* Mantener la relación de aspecto */
+    display: block; /* Asegurar que la imagen se comporte como un bloque */
+    margin-left: 200px;
+}
+
+.Datos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FFF;
+    width: 100%;
+}
+
+
+
+.Datos p {
+    color: #887A7A;
+    font-family: Archivo;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 3.84px;
+    display: flex;
+    border: 1px solid #000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    outline: none;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: left;
+    width: 800px;
+}
+
+.Columna1 {
+    display: flex;
+    align-items: flex-end;
+    width: 33%;
+    margin-bottom: 0;
+}
+
+.Boton {
+    background-color: #000;
+    color: #FFF;
+    border: none;
+    border-radius: 23px;
+    padding: 15px 30px;
+    font-family: Archivo;
+    font-size: 40px;
+    letter-spacing: 17.28px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0;
+    transition: background-color 0.3s ease;
+    gap: 80px;
+}
+
+.Boton:hover {
+    background-color: #333;
+}
+

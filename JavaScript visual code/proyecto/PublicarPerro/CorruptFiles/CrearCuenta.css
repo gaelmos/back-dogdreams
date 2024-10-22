@@ -1,0 +1,72 @@
+.pantalla{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.ColumnasTexto{
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;   
+    background: #FFF;
+    width: 100%;
+
+}
+
+
+.ColumnasTexto input {
+    color: #887A7A;
+    font-family: Kenia;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;    
+    letter-spacing: 3.84px;
+    display: flex;
+    border: 1px solid #000;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    outline: none;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    box-sizing: content-box;
+    
+}
+
+.Logo p{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: #E7B639;
+    font-family: Kenia;
+    font-size: 128px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 40.96px;
+}
+
+.Logo{
+    align-items: center;
+    display: flex;
+    padding: 7px 269px;
+    justify-content: center;
+    gap: 10px;
+    flex-shrink: 0;
+    background: #313130;
+    filter: blur(2px);
+    margin-bottom: 20px;
+    height: 150px;
+}
+
+.patas {
+    display: flex;
+    justify-content: flex-start; 
+    width: 100%; 
+    margin-left: 50px; 
+    flex-direction: row;
+}

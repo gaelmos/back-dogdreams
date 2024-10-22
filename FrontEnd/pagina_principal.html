@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace de Perros</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Marketplace de Perros</h1>
+        <button id="filterBtn">Filtros</button>
+        <button id="publishBtn">Publicar</button>
+        <div id="filterMenu" class="filter-menu">
+            <label for="breedFilter">Raza:</label>
+            <input type="text" id="breedFilter" placeholder="Ej. Beagle">
+
+            <label for="sizeFilter">Tamaño:</label>
+            <input type="text" id="sizeFilter" placeholder="Ej. Grande">
+
+            <label for="colorFilter">Color:</label>
+            <input type="text" id="colorFilter" placeholder="Ej. Blanco">
+
+            <button id="applyFilters">Aplicar Filtros</button>
+        </div>
+    </header>
+    <main id="marketplace">
+        <!-- Aquí se cargarán las fotos de los perros -->
+    </main>
+    <script src="marketplace.js"></script>
+</body>
+</html>

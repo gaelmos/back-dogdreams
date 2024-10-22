@@ -1,0 +1,180 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para Pantallas Grandes (Desktop y Laptop) */
+.Pantalla {
+    width: 95vw;
+    height: 100vh; /* Modificado: Se cambió '100h' a '100vh' para ajustar correctamente la altura. */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Modificado: Se añadió justify-content para distribuir mejor los elementos. */
+    padding: 0 50px; /* Modificado: Se añadió padding para mejorar el espaciado horizontal. */
+}
+
+.Columnas {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    background: #FFF;
+    width: 60%; /* Modificado: Se redujo el ancho de las columnas para una mejor distribución en pantallas grandes. */
+    gap: 19px;
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #313130;
+    filter: blur(2px);
+    margin-bottom: 20px;
+    height: 150px;
+    width: 100%; /* Modificado: Se añadió un ancho del 100% para que el logo abarque toda la pantalla. */
+}
+
+.Logo p {
+    color: #DDDADA;
+    font-family: Archivo;
+    font-size: 128px;
+    letter-spacing: 40.96px;
+    text-align: center; /* Modificado: Se centró el texto dentro del div del logo. */
+}
+
+.Patitas {
+    justify-content: flex-start;
+    display: flex;
+    margin-left: 30px; /* Modificado: Se redujo el margen izquierdo para ajustarlo mejor en pantallas grandes. */
+}
+
+.Foto {
+    display: flex;
+    flex-direction: column; /* Modificado: Se estableció flex-direction en columna para alinear los elementos correctamente. */
+    align-items: center; /* Modificado: Alineación centrada para las fotos y textos dentro del contenedor. */
+    margin-right: 30px; /* Modificado: Se redujo el margen derecho para ajustarlo mejor en pantallas grandes. */
+}
+
+.Foto p {
+    text-align: left;
+    font-size: 30px;
+}
+
+.Foto input {
+    margin-top: 20px;
+}
+
+/* Botón de Publicar */
+.Publicar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0e0d0b;
+    padding: 15px 80px;
+    border-radius: 19px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.Publicar button {
+    color: #ece4e4;
+    font-family: 'Kenia', cursive;
+    font-size: 40px; /* Modificado: Se redujo el tamaño del texto del botón para mayor legibilidad. */
+    background-color: transparent;
+    border: none;
+    letter-spacing: 5px; /* Modificado: Se ajustó el espaciado entre letras para que se vea mejor. */
+}
+
+/* Estilos para pantallas más pequeñas (Tabletas, Teléfonos, etc.) */
+@media (max-width: 1024px) {
+    .Pantalla {
+        flex-direction: column; /* Modificado: Se cambió a disposición en columna para que los elementos se apilen verticalmente. */
+        justify-content: center; /* Modificado: Alineación centrada en dispositivos más pequeños. */
+        padding: 20px; /* Modificado: Se añadió padding para mejorar el espaciado en pantallas medianas. */
+    }
+
+    .Columnas {
+        width: 100%; /* Modificado: Se hizo que las columnas ocupen el 100% del ancho. */
+        padding: 10px; /* Modificado: Se añadió padding interno. */
+    }
+
+    .Logo p {
+        font-size: 64px; /* Modificado: Se redujo el tamaño del texto del logo para pantallas más pequeñas. */
+        letter-spacing: 10px; /* Modificado: Se ajustó el espaciado de letras para un mejor ajuste. */
+    }
+
+    .Publicar button {
+        font-size: 50px; /* Modificado: Tamaño de fuente ajustado para pantallas medianas. */
+        letter-spacing: 15px;
+    }
+
+    .Foto img {
+        width: 100%;
+        max-width: 200px; /* Modificado: Se limitó el tamaño de la imagen a un máximo de 200px. */
+    }
+
+    .Patitas {
+        justify-content: center; /* Modificado: Justificación centrada para las imágenes de las patitas. */
+        margin-left: 0; /* Modificado: Se eliminó el margen en dispositivos más pequeños. */
+    }
+
+    .Foto {
+        margin-right: 0; /* Modificado: Se eliminó el margen derecho en pantallas pequeñas. */
+    }
+}
+
+/* Estilos para pantallas muy pequeñas (Móviles) */
+@media (max-width: 600px) {
+    .Pantalla {
+        padding: 10px; /* Modificado: Padding reducido para que los elementos quepan en pantallas pequeñas. */
+        flex-direction: column;
+    }
+
+    .Columnas input {
+        font-size: 20px; /* Modificado: Tamaño de fuente reducido en campos de input para pantallas pequeñas. */
+        letter-spacing: 5px;
+        padding: 10px; /* Modificado: Padding ajustado en los inputs para una mejor experiencia de usuario. */
+    }
+
+    .Logo p {
+        font-size: 48px; /* Modificado: Tamaño del logo reducido para pantallas móviles. */
+        letter-spacing: 8px; /* Modificado: Espaciado de letras ajustado para móviles. */
+    }
+
+    .Publicar button {
+        font-size: 35px; /* Modificado: Se redujo el tamaño del texto del botón para pantallas pequeñas. */
+        letter-spacing: 10px; /* Modificado: Espaciado ajustado en el botón de publicar. */
+        padding: 10px 50px; /* Modificado: Padding ajustado para pantallas pequeñas. */
+    }
+
+    .Foto img {
+        max-width: 150px; /* Modificado: Tamaño máximo de la imagen reducido para dispositivos móviles. */
+    }
+
+    .Foto p {
+        font-size: 20px; /* Modificado: Tamaño de la fuente del texto de la foto reducido en móviles. */
+    }
+
+    .Foto input {
+        width: 100%; /* Modificado: Input de foto ajustado al 100% en móviles. */
+        margin-top: 10px;
+    }
+}
+
+/* Input Fields */
+.Columnas input {
+    font-family: Archivo;
+    font-size: 24px; /* Modificado: Tamaño de fuente ajustado para una mejor legibilidad. */
+    letter-spacing: 5px; /* Modificado: Espaciado entre letras ajustado para campos de input. */
+    padding: 10px; /* Modificado: Padding ajustado en los campos de input. */
+    border-radius: 10px; /* Modificado: Bordes redondeados ajustados para mejor diseño. */
+    border: 1px solid #000;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    width: 100%; /* Modificado: Ancho del 100% para inputs en todos los tamaños de pantalla. */
+    max-width: 500px; /* Modificado: Ancho máximo ajustado para pantallas grandes. */
+}

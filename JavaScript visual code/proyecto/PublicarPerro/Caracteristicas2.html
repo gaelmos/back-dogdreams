@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Kenia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Caracteristicas2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="icon" href="/JavaScript visual code/proyecto/Assets/logopolis.png" type="image/x-icon">
+
+    <title>Características</title>
+</head>
+<body>
+
+    <div class="Logo">
+        <p>Características</p>
+    </div>
+
+    <div class="Pantalla">
+
+        <form id="registerForm" class="Formulario">
+            <div class="Patas">
+                <img src="../Assets/Captura de pantalla 2024-09-24 134343.png" alt="patas.png">
+            </div>
+
+            <div class="Columnas">
+                <div class="columnaMail">
+                    <input id="email" type="text" placeholder="Nombre" required>
+                </div>
+                <div class="Contraseña">
+                    <input id="password" type="text" placeholder="Raza" required>
+                </div>
+                <div class="DNI">
+                    <input id="dni" type="date" placeholder="Nacimiento" required>
+                </div>
+                <div class="Telefono">
+                    <input id="phone" type="text" placeholder="Color" required>
+                </div>
+                <div class="NombreApellido">
+                    <input id="fullName" type="text" placeholder="Tamaño" required>
+                </div>
+                <div class="Dificultades">
+                    <input id="address" type="text" placeholder="Dificultades (si/no)" required>
+                </div>
+                <div class="Crear">
+                    <button type="submit"><p>Publicar</p></button>
+                </div>
+            </div>
+
+            <div class="FotoPerfil">
+                <div class="CuadroBlanco"></div> <!-- Cuadro blanco para la foto -->
+                <div class="ImagenTextoArchivo">
+                    <p>Insertar foto de perfil</p>
+                    <input id="photo" type="file" accept="image/*" required>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <script src="crearCuenta.js"></script>
+</body>
+</html>
