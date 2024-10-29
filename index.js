@@ -86,4 +86,16 @@ app.post("/usuario",async (req, res) => {
         }
 
     });
+    app.post("/adoptar", verificarToken, async (req, res) => {
+        const { idperro } = req.body;
+        const dnicliente = req.usuario; 
+    
+        try {
+            const adopcion = await usuario.adoptarPerro(idperro, dnicliente);
+            res.status(200).json({ message: "Adopción registrada correctamente", adopcion });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Error al registrar la adopción' });
+        }
+    });
     export{claveSecreta}
