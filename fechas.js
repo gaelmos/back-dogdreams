@@ -58,10 +58,23 @@ const crateperro = async (nombre, raza, descripcion, foto, color, nacimiento, ta
         throw err; 
     }
 };
+const adoptarPerro = async (idperro, dnicliente) => {
+    const queryAdopcion = 'UPDATE publicaciones SET dnicliente = $1, fechaadopcion = CURRENT_DATE WHERE idperro = $2 RETURNING *';
+    const valuesAdopcion = [dnicliente, idperro];
+
+    try {
+        const resultAdopcion = await client.query(queryAdopcion, valuesAdopcion);
+        console.log("Adopción registrada:", resultAdopcion.rows[0]);
+        return resultAdopcion.rows[0];
+    } catch (err) {
+        console.error('Error al registrar la adopción:', err);
+        throw err;
+    }
+};
 const usuario = {
     createusuario,
     crateperro,
- 
+    adoptarPerro
  };
  
  export default usuario;
