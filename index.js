@@ -72,11 +72,11 @@ app.post("/inicio", async (req, res) =>{
         
 });
 app.post("/perros", verificarToken, async (req, res) => {
-        const { nombre, raza, color, nacimiento, tamaño, dificultades } = req.body;
+        const { nombre, raza, descripcion, color, nacimiento, tamaño, dificultades } = req.body;
         const dniDueño = req.usuario;  
         try { 
             const nuevoperro = await usuario.crateperro(
-                nombre, raza, color, nacimiento, tamaño, dificultades, dniDueño
+                nombre, raza, descripcion, color, nacimiento, tamaño, dificultades, dniDueño
             );
             res.json(nuevoperro);
     

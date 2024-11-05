@@ -33,10 +33,10 @@ const createusuario = async (nombre, mail, dni, numero, direccion, contraseña, 
             throw err; 
         }
 };
-const crateperro = async (nombre, raza, color, nacimiento, tamaño, dificultades, dniDueño) => {
+const crateperro = async (nombre, raza, descripcion, color, nacimiento, tamaño, dificultades, dniDueño) => {
     console.log("DNI del dueño:", dniDueño);
-    const queryPerro = 'INSERT INTO perros (nombre, raza, color, nacimiento, tamaño, dificultades) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id ';
-    const valuesPerro = [nombre, raza, color, nacimiento, tamaño, dificultades];
+    const queryPerro = 'INSERT INTO perros (nombre, raza, descripcion, color, nacimiento, tamaño, dificultades) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id ';
+    const valuesPerro = [nombre, raza, descripcion, color, nacimiento, tamaño, dificultades];
 
     try {
         
