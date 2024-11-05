@@ -34,11 +34,11 @@ app.post("/usuario",async (req, res) => {
             console.log(err);
             }
     }  
-    });
-    app.post("/inicio", async (req, res) =>{
+});
+app.post("/inicio", async (req, res) =>{
         const { mail, contraseña } = req.body;
         try {
-            // Obtener el hash almacenado en la base de datos
+          // Obtener el hash almacenado en la base de datos
             const queryinicio = "SELECT contraseña, mail, dni FROM usuario WHERE mail = $1";
             const resulta1 = await client.query(queryinicio, [mail]);
     
@@ -70,8 +70,8 @@ app.post("/usuario",async (req, res) => {
             res.status(500).json({ error: 'Error al iniciar sesión' });
         }
         
-    });
-    app.post("/perros", verificarToken, async (req, res) => {
+});
+app.post("/perros", verificarToken, async (req, res) => {
         const { nombre, raza, color, nacimiento, tamaño, dificultades } = req.body;
         const dniDueño = req.usuario;  
         try { 
@@ -85,8 +85,8 @@ app.post("/usuario",async (req, res) => {
             res.status(500).json({ error: 'Error al crear al perro' });
         }
 
-    });
-    app.post("/adoptar", verificarToken, async (req, res) => {
+});
+app.post("/adoptar", verificarToken, async (req, res) => {
         const { idperro } = req.body;
         const dnicliente = req.usuario; 
     
@@ -97,5 +97,5 @@ app.post("/usuario",async (req, res) => {
             console.error(err);
             res.status(500).json({ error: 'Error al registrar la adopción' });
         }
-    });
+});
     export{claveSecreta}
