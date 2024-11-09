@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Imagen</title>
+</head>
+<body>
+    <h1>Cargar Imagen y Datos</h1>
+    <form id="uploadForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <label for="raza">raza:</label>
+        <input type="text" id="raza" name="raza" required><br>
+
+        <label for="tamaño">tamaño:</label>
+        <input type="text" id="tamaño" name="tamaño" required><br>
+
+        <label for="dificultades">dificultades:</label>
+        <input type="text" id="dificultades" name="dificultades" required><br>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" required></textarea><br>
+
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color" required><br>
+
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required><br>
+
+        <label for="imagen">Imagen:</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*" required><br>
+
+        <button type="button" onclick="cargarDatos()">Subir</button>
+    </form>
+
+    <!-- Incluir el archivo JavaScript externo -->
+    <script src="cargarDatos.js"></script>
+</body>
+</html>
