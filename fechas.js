@@ -71,10 +71,23 @@ const adoptarPerro = async (idperro, dnicliente) => {
         throw err;
     }
 };
+const getperros = async () => {
+    const query = 'SELECT * FROM perros';
+
+    try {
+        const result = await client.query(query);
+        console.log("Perros encontrados:", result.rows);
+        return result.rows;
+    } catch (err) {
+        console.error('Error al obtener los perros:', err);
+        throw err;
+    }
+};
 const usuario = {
     createusuario,
     crateperro,
-    adoptarPerro
+    adoptarPerro,
+    getperros
  };
  
  export default usuario;

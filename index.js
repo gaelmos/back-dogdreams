@@ -38,7 +38,6 @@ app.post("/usuario",async (req, res) => {
 app.post("/inicio", async (req, res) =>{
         const { mail, contraseña } = req.body;
         try {
-          // Obtener el hash almacenado en la base de datos
             const queryinicio = "SELECT contraseña, mail, dni FROM usuario WHERE mail = $1";
             const resulta1 = await client.query(queryinicio, [mail]);
     
@@ -97,5 +96,16 @@ app.post("/adoptar", verificarToken, async (req, res) => {
             console.error(err);
             res.status(500).json({ error: 'Error al registrar la adopción' });
         }
+});
+app.get("/traer", async (req, res) => {
+
+    try {
+        const perros = await usuario.getperros();
+        res.json(perros);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error al obtener los perros' });
+    }
+
 });
     export{claveSecreta}
