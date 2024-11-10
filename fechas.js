@@ -76,8 +76,15 @@ const getperros = async () => {
 
     try {
         const result = await client.query(query);
-        console.log("Perros encontrados:", result.rows);
-        return result.rows;
+        const perros = result.rows.map(perro => {
+            return {
+                ...perro,                   
+                foto: `data:image/png;base64,${perro.foto}`
+            };
+        });
+        console.log("Perros encontrados:", perros);
+
+        return perros;
     } catch (err) {
         console.error('Error al obtener los perros:', err);
         throw err;
