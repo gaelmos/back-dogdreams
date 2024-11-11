@@ -108,4 +108,20 @@ app.get("/traer", async (req, res) => {
     }
 
 });
+app.get("/traerusu", async (req, res) => {
+    const { dni } = req.params;
+
+    try {
+        const usuario = await obtenerusuario(dni);
+        
+        if (usuario) {
+            res.status(200).json(usuario);
+        } else {
+            res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Error al obtener el usuario' });
+    }
+
+});
     export{claveSecreta}
