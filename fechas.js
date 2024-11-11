@@ -21,9 +21,6 @@ const createusuario = async (nombre, mail, dni, numero, direccion, contraseña, 
     if (contraseñaResult.rows.length > 0) {
         throw new Error('La contraseña ya está en uso');
     }
-
-    const foto = `data:image/png;base64,${foto}`
-
     const query = 'INSERT INTO usuario (nombre, mail, dni, numero, direccion, contraseña, foto) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
     const values = [nombre, mail, parseInt(dni), numero, direccion, contraseña, foto];
         try {
