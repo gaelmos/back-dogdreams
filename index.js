@@ -108,7 +108,7 @@ app.get("/traer", async (req, res) => {
     }
 
 });
-app.get("/traerusu", async (req, res) => {
+app.get("/traerusu/:id", async (req, res) => {
     const { dni } = req.params;
 
     try {
