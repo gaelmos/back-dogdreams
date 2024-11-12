@@ -105,13 +105,37 @@ const obtenerusuario = async (dni) => {
         throw err;
     }
 };
+const eliminar = async (idPerro) => {
+    const verificarusuario = 'SELECT iddueño FROM publicaciones WHERE idperro = $1';
+    const eliminarPublicacion = 'DELETE FROM publicaciones WHERE idperro = $1';
+    const eliminarPerro = 'DELETE FROM perros WHERE id = $1';
 
+    try {
+        const propietarioResult = await client.query(verificarusuario, [idPerro]);
+        if (propietarioResult.rows.length == 0) {
+            throw new Error('El perro no existe o no tiene publicación asociada');
+        }
+
+        const idDueño = propietarioResult.rows[0].iddueño;
+        if (idDueño != dniUsuario) {
+            throw new Error('No podes eliminar al perro');
+        }
+        await client.query(eliminarPublicacion, [idPerro]);
+        await client.query(eliminarPerro, [idPerro]);
+
+        return { message: 'la publicación se elimino correctamente' };
+    } catch (err) {
+        console.error('Error al eliminar el perro:', err);
+        throw err;
+    }
+};
 const usuario = {
     createusuario,
     crateperro,
     adoptarPerro,
     getperros,
-    obtenerusuario
+    obtenerusuario,
+    eliminar
  };
  
  export default usuario;

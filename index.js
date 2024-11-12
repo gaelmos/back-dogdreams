@@ -124,4 +124,15 @@ app.get("/traerusu", async (req, res) => {
     }
 
 });
+app.delete("/perros/:id", verificarToken, async (req, res) => {
+    const idPerro = parseInt(req.params.id);
+    const dniUsuario = req.usuario; 
+
+    try {
+        const resultado = await eliminarPerro(idPerro, dniUsuario);
+        res.status(200).json(resultado);
+    } catch (err) {
+        res.status(403).json({ error: err.message });
+    }
+});
     export{claveSecreta}
