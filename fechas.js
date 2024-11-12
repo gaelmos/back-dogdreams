@@ -89,7 +89,7 @@ const getperros = async () => {
     }
 };
 const obtenerusuario = async (dni) => {
-    const query = 'SELECT * FROM usuarios WHERE dni = $1';
+    const query = 'SELECT * FROM usuario WHERE dni = $1';
     const values = [dni];
 
     try {

@@ -108,23 +108,24 @@ app.get("/traer", async (req, res) => {
     }
 
 });
-app.get("/traerusu/:id", async (req, res) => {
+app.get("/traerusu/:dni", async (req, res) => {
     const { dni } = req.params;
 
     try {
-        const usuario = await obtenerusuario(dni);
+        const usuario2 = await usuario.obtenerusuario(dni);
         
-        if (usuario) {
-            res.status(200).json(usuario);
+        if (usuario2) {
+            res.status(200).json(usuario2);
         } else {
             res.status(404).json({ error: 'Usuario no encontrado' });
         }
     } catch (err) {
         res.status(500).json({ error: 'Error al obtener el usuario' });
+        console.error("el error", err)
     }
 
 });
-app.delete("/perros/:id", verificarToken, async (req, res) => {
+app.delete("/eliminar/:id", verificarToken, async (req, res) => {
     const idPerro = parseInt(req.params.id);
     const dniUsuario = req.usuario; 
 
