@@ -1,4 +1,4 @@
-import {client} from './dbconfig.js'
+import { client } from './dbconfig.js'
 
 const createusuario = async (nombre, mail, dni, numero, direccion, contraseña, foto) => {
     const dnicheck = 'SELECT * FROM usuario WHERE dni = $1';
@@ -21,23 +21,24 @@ const createusuario = async (nombre, mail, dni, numero, direccion, contraseña, 
     if (contraseñaResult.rows.length > 0) {
         throw new Error('La contraseña ya está en uso');
     }
+
     const query = 'INSERT INTO usuario (nombre, mail, dni, numero, direccion, contraseña, foto) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
     const values = [nombre, mail, parseInt(dni), numero, direccion, contraseña, foto];
-        try {
-            const result = await client.query(query, values);
-            return result.rows[0];
-        } catch (err) {
-            console.error('Error al insertar el usuario:', err);
-            throw err; 
-        }
+    try {
+        const result = await client.query(query, values);
+        return result.rows[0];
+    } catch (err) {
+        console.error('Error al insertar el usuario:', err);
+        throw err; 
+    }
 };
+
 const crateperro = async (nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades, dniDueño) => {
     console.log("DNI del dueño:", dniDueño);
     const queryPerro = 'INSERT INTO perros (nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id ';
-    const valuesPerro = [nombre, raza, descripcion,foto, color, nacimiento, tamaño, dificultades];
+    const valuesPerro = [nombre, raza, descripcion, foto, color, nacimiento, tamaño, dificultades];
 
     try {
-        
         const resultPerro = await client.query(queryPerro, valuesPerro);
         const perroId = resultPerro.rows[0].id;
         const queryPublicacion = 'INSERT INTO publicaciones (idperro, fechapublica, iddueño) VALUES ($1, CURRENT_DATE::DATE, $2) RETURNING *';
@@ -56,6 +57,7 @@ const crateperro = async (nombre, raza, descripcion, foto, color, nacimiento, ta
         throw err; 
     }
 };
+
 const adoptarPerro = async (idperro, dnicliente) => {
     const queryAdopcion = 'UPDATE publicaciones SET dnicliente = $1, fechaadopcion = CURRENT_DATE WHERE idperro = $2 RETURNING *';
     const valuesAdopcion = [dnicliente, idperro];
@@ -69,34 +71,38 @@ const adoptarPerro = async (idperro, dnicliente) => {
         throw err;
     }
 };
-const getperros = async () => {
-    const query = 'SELECT * FROM perros';
 
+const getperros = async () => {
+    const query = `
+        SELECT p.*, pu.iddueño AS dni_dueño
+        FROM perros p
+        LEFT JOIN publicaciones pu ON p.id = pu.idperro
+    `;
     try {
         const result = await client.query(query);
         const perros = result.rows.map(perro => {
             return {
                 ...perro,                   
-                foto: `data:image/png;base64,${perro.foto}`
+                foto: `data:image/png;base64,${perro.foto}`,
+                dni_dueño: perro.dni_dueño // Asegúrate de incluir el dni_dueño
             };
         });
         console.log("Perros encontrados:", perros);
-
         return perros;
     } catch (err) {
         console.error('Error al obtener los perros:', err);
         throw err;
     }
 };
+
 const obtenerusuario = async (dni) => {
     const query = 'SELECT * FROM usuario WHERE dni = $1';
     const values = [dni];
 
     try {
         const result = await client.query(query, values);
-        
         if (result.rows.length > 0) {
-            return result.rows[0]; 
+            return result.rows[0]; // Retorna el usuario con ese DNI
         } else {
             return null;
         }
@@ -105,37 +111,13 @@ const obtenerusuario = async (dni) => {
         throw err;
     }
 };
-const eliminar = async (idPerro) => {
-    const verificarusuario = 'SELECT iddueño FROM publicaciones WHERE idperro = $1';
-    const eliminarPublicacion = 'DELETE FROM publicaciones WHERE idperro = $1';
-    const eliminarPerro = 'DELETE FROM perros WHERE id = $1';
 
-    try {
-        const propietarioResult = await client.query(verificarusuario, [idPerro]);
-        if (propietarioResult.rows.length == 0) {
-            throw new Error('El perro no existe o no tiene publicación asociada');
-        }
-
-        const idDueño = propietarioResult.rows[0].iddueño;
-        if (idDueño != dniUsuario) {
-            throw new Error('No podes eliminar al perro');
-        }
-        await client.query(eliminarPublicacion, [idPerro]);
-        await client.query(eliminarPerro, [idPerro]);
-
-        return { message: 'la publicación se elimino correctamente' };
-    } catch (err) {
-        console.error('Error al eliminar el perro:', err);
-        throw err;
-    }
-};
 const usuario = {
     createusuario,
     crateperro,
     adoptarPerro,
     getperros,
-    obtenerusuario,
-    eliminar
- };
- 
- export default usuario;
+    obtenerusuario
+};
+
+export default usuario;
